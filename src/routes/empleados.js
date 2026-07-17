@@ -15,8 +15,12 @@ router.get("/", async (req, res) => {
         res.json(empleados);
 
     } catch (error) {
-        res.status(500).json({ error: "Error al consultar los empleados" });
-    }
+    console.error(error);
+
+    res.status(500).json({
+        error: error.message
+    });
+}
 });
 
 // Agregar empleado
