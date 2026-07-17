@@ -102,3 +102,11 @@ exports.eliminarEmpleado = async (req, res) => {
     });
   }
 };
+
+module.exports = {
+  obtenerEmpleados,
+  obtenerEmpleadoPorId,
+  crearEmpleado,
+  actualizarEmpleado,
+  eliminarEmpleado
+};
