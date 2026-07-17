@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 
 const ClienteSchema = new mongoose.Schema({
-  _id: {
-    type: String,
-    required: true
-  },
   nombre: {
     type: String,
     required: true
