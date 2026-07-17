@@ -102,3 +102,43 @@ exports.eliminarPrestamo = async (req, res) => {
     });
   }
 };
+
+// Actualizar únicamente el estado de un préstamo
+exports.actualizarEstadoPrestamo = async (req, res) => {
+  try {
+    const { estado } = req.body;
+
+    if (!estado) {
+      return res.status(400).json({
+        mensaje: "Debe enviar el nuevo estado"
+      });
+    }
+
+    const prestamo = await Prestamo.findById(req.params.id);
+
+    if (!prestamo) {
+      return res.status(404).json({
+        mensaje: "Préstamo no encontrado"
+      });
+    }
+
+    if (prestamo.estado === "finalizado") {
+      return res.status(403).json({
+        mensaje: "No se puede modificar un préstamo que ya está finalizado"
+      });
+    }
+
+    prestamo.estado = estado;
+    await prestamo.save();
+
+    res.status(200).json({
+      mensaje: "Estado actualizado correctamente",
+      prestamo
+    });
+  } catch (error) {
+    res.status(400).json({
+      mensaje: "No se pudo actualizar el estado",
+      error: error.message
+    });
+  }
+};
