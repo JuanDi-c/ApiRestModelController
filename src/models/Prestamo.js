@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 
 const prestamoSchema = new mongoose.Schema({
-  _id: {
-    type: String,
-    required: true
-  },
   cliente: {
     type: String,
     required: true
